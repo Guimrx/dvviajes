@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DV VIAJES | Libertad y Aventura</title>
+    
+    <!-- Fontes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animações -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --sky-blue: #0ea5e9;
+            --ocean-teal: #0d9488;
+            --sunset-orange: #f97316;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --white-glass: rgba(255, 255, 255, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background-color: #f0f9ff;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.2;
+        }
+
+        /* --- Background Parallax --- */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+        }
+
+        /* Overlay Escuro */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.55); 
+            z-index: -1;
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .logo {
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-shadow: 0px 4px 15px rgba(0,0,0,0.6), 0px 2px 0px rgba(0,0,0,0.8);
+            letter-spacing: -1px;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-shadow: 0px 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .hero-highlight {
+            color: var(--sunset-orange);
+            font-style: italic;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+        }
+
+        /* Botão "Aventureiro" */
+        .btn-freedom {
+            background: var(--sunset-orange);
+            color: white;
+            padding: 16px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid white;
+        }
+
+        .btn-freedom:hover {
+            transform: translateY(-5px);
+            background: #ea580c;
+            border-color: #ea580c;
+        }
+
+        /* --- Content Section --- */
+        .content-wrapper {
+            background: linear-gradient(to bottom, transparent, #f0f9ff 10%);
+            padding-top: 50px;
+            padding-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-card {
+            background: var(--white-glass);
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            max-width: 900px;
+            margin: -60px auto 60px;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .intro-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* --- Grid de Benefícios --- */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.1);
+            transition: 0.4s ease;
+            border-bottom: 5px solid transparent;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 5px solid var(--sky-blue);
+        }
+
+        .icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--sky-blue);
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .benefit-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* --- Seção de Testemunhos --- */
+        .testimonials-section {
+            padding: 100px 20px 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            color: var(--sunset-orange);
+            border-bottom: 3px solid var(--sky-blue);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .video-wrapper {
+            position: relative;
+            background: linear-gradient(135deg, var(--sky-blue), var(--sunset-orange));
+            padding: 5px; 
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .video-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.25);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            display: block;
+            border-radius: 15px;
+            background: #000;
+            aspect-ratio: 9/16; 
+            object-fit: cover;
+        }
+
+        /* --- Footer --- */
+        .footer-freedom {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero h2 { font-size: 1.1rem; }
+            .intro-card { margin: 20px; padding: 30px 20px; }
+            .btn-freedom { width: 100%; justify-content: center; }
+        }
+        
+        /* Floating Whatsapp */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 28px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: 0.3s;
+        }
+        .wa-float:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <!-- Fundo Fixo (Parallax) -->
+    <div class="parallax-bg"></div>
+    <div class="overlay"></div>
+
+    <header>
+        <div class="logo">DV VIAJES</div>
+        <div style="color: white; font-weight: 700; background: rgba(0,0,0,0.4); padding: 5px 15px; border-radius: 20px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);">
+            <i class="fas fa-map-marker-alt" style="color: var(--sunset-orange);"></i> Madrid
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <h2>¿Viajar solo y sin rumbo?</h2>
+            <h1>
+                DESCUBRE EL MUNDO <br>
+                <span class="hero-highlight">EN BUENA COMPAÑÍA</span>
+            </h1>
+            
+            <br>
+            <a href="#experiencia" class="btn-freedom">
+                Empezar la Aventura <i class="fas fa-plane-departure"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Conteúdo -->
+    <section class="content-wrapper" id="experiencia">
+        
+        <!-- Texto Introdutório -->
+        <div class="intro-card" data-aos="fade-up">
+            <h2 style="margin-bottom: 20px; color: var(--sky-blue); font-weight: 800;">Expande tus horizontes</h2>
+            <p>
+                Nadie puede dudar 🤔 que explorar lugares nuevos da vida a nuevas referencias. 
+                Pero unirte a un grupo de personas con el <strong>mismo hobbie</strong>, la misma curiosidad de conocer nuevas culturas, 
+                es la mejor forma de compartir experiencias y guardar recuerdos para siempre.
+            </p>
+        </div>
+
+        <!-- Grid de Benefícios -->
+        <div class="cards-grid">
+            
+            <!-- Card 1 -->
+            <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="icon-wrapper">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <h3>Más Económica</h3>
+                <p>
+                    Olvídate de los gastos elevados de viajar solo. La ventaja más evidente de viajar en grupo es que te permitirá 
+                    <strong>ahorrar dinero</strong> en transporte y actividades compartidas.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="icon-wrapper" style="color: var(--sunset-orange); background: #ffedd5;">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h3>Más Divertida</h3>
+                <p>
+                    No hay tiempo para el aburrimiento. Siempre habrá alguien dispuesto a una charla o una aventura. 
+                    Crearás vínculos fuertes y anécdotas que recordaréis con lujo de detalles.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="icon-wrapper" style="color: var(--ocean-teal); background: #ccfbf1;">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Más Segura</h3>
+                <p>
+                    Viaja con la tranquilidad de tener respaldo. Ante cualquier imprevisto, el grupo y la organización están ahí. 
+                    Solo preocúpate por disfrutar del paisaje y el momento.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- SEÇÃO DE DEPOIMENTOS -->
+        <div class="testimonials-section">
+            <h2 class="section-title" data-aos="fade-up">
+                Ellos ya viajaron <span>con nosotros</span> 👇🏻
+            </h2>
+
+            <div class="video-grid">
+                
+                <!-- Video 1 -->
+                <div class="video-wrapper" data-aos="flip-left">
+                    <video controls preload="metadata">
+                        <source src="video1.mp4" type="video/mp4">
+                        Tu navegador no soporta videos.
+                    </video>
+                </div>
+
+                <!-- Video 2 (Começa aos 2 segundos) -->
+                <div class="video-wrapper" data-aos="flip-left" data-aos-delay="100">
+                    <video controls preload="metadata">
+                        <!-- AQUI ESTÁ A ALTERAÇÃO: #t=2 -->
+                        <source src="video2.mp4#t=2" type="video/mp4">
+                        Tu navegador no soporta videos.
+                    </video>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="video-wrapper" data-aos="flip-left" data-aos-delay="200">
+                    <video controls preload="metadata">
+                        <source src="video3.mp4" type="video/mp4">
+                        Tu navegador no soporta videos.
+                    </video>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer Integrado -->
+        <div class="footer-freedom">
+            <h2 data-aos="zoom-in" style="font-size: 2rem; margin-bottom: 10px; color: var(--text-dark);">Tu próxima historia comienza aquí</h2>
+            <p style="color: #666; margin-bottom: 30px;">Salidas programadas desde Madrid.</p>
+            
+            <a href="#" class="btn-freedom">
+                Ver Fechas Disponibles
+            </a>
+            
+            <div style="margin-top: 50px; font-size: 0.8rem; color: #aaa;">
+                &copy; 2023 DV VIAJES - Live Free.
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Botão Whatsapp -->
+    <a href="#" class="wa-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true,
+            duration: 800,
+            offset: 50
+        });
+    </script>
+</body>
+</html>
